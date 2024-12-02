@@ -4,6 +4,7 @@ import 'package:coffee_shop/view/widgets/app_global_text.dart';
 import 'package:coffee_shop/view/widgets/card_coffe.dart';
 import 'package:coffee_shop/viewmodel/home_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,15 +32,44 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final viewModel = Provider.of<HomeViewModel>(context);
 
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(viewModel),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        appBar: _buildAppBar(),
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildHeader(),
+              Expanded(child: _buildBody(viewModel)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  Padding _buildHeader() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppGlobalText(text: "Olá, Celson", style: TextStyleEnum.h2_bold),
+          AppGlobalText(
+            text: "Qual Café você vai querer hoje ?",
+            style: TextStyleEnum.p_medium,
+          ),
+        ],
+      ),
     );
   }
 
   Container _buildBody(HomeViewModel viewModel) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: viewModel.isLoading
           ? const Center(
               child: CircularProgressIndicator(
@@ -49,12 +79,9 @@ class _HomePageState extends State<HomePage> {
               ? Center(child: Text(viewModel.errorMessage!))
               : GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount:
-                        2, // Ajuste o número de colunas conforme necessário
-                    childAspectRatio:
-                        0.7, // Ajuste o aspecto de cada item (opcional)
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
                   ),
-                  //    scrollDirection: Axis.horizontal,
                   itemCount: viewModel.coffes.length,
                   itemBuilder: (context, index) {
                     var coffe = viewModel.coffes[index];
@@ -72,12 +99,32 @@ class _HomePageState extends State<HomePage> {
   AppBar _buildAppBar() {
     return AppBar(
       centerTitle: true,
-      title: AppGlobalText(
-        text: 'Coffee Shop',
-        style: TextStyleEnum.h2_bold,
-        color: ligth,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.coffee_rounded,
+                color: primary,
+                size: 30,
+              ),
+              AppGlobalText(
+                text: 'Coffee Shop',
+                style: TextStyleEnum.h3_bold,
+                color: primary,
+              ),
+            ],
+          ),
+          const Icon(
+            Icons.menu_rounded,
+            color: primary,
+            size: 30,
+          ),
+        ],
       ),
-      backgroundColor: primary,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
     );
   }
 }

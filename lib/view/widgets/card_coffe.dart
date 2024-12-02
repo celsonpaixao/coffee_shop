@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coffee_shop/model/cofee_model.dart';
 import 'package:coffee_shop/style/app_colors.dart';
 import 'package:coffee_shop/style/app_text_style.dart';
+import 'package:coffee_shop/view/widgets/app_global_spacing.dart';
 import 'package:coffee_shop/view/widgets/app_global_text.dart';
 import 'package:flutter/material.dart';
 
@@ -19,44 +20,25 @@ class CardCoffe extends StatelessWidget {
         margin: const EdgeInsets.all(8.0),
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 8,
-              offset: const Offset(0, 2), // Shadow position
-            ),
-          ],
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Container for background color and shadow
-            Positioned(
-              right: 0,
-              left: 0,
-              top: 0,
-              child: Container(
-                height: 100,
-                decoration: const BoxDecoration(
-                  color:
-                      secundary, // Certifique-se de que a cor 'secundary' está definida
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.0),
+            border: Border.all(color: secundary)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: secundary.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-            ),
-            // Container for the image
-            Positioned(
-              top: -10,
-              left: 0,
-              right: 0,
-              child: SizedBox(
-                width: double.infinity,
                 child: CachedNetworkImage(
                   imageUrl: coffe.imageUrl!,
                   imageBuilder: (context, imageProvider) => Container(
-                    height: 230,
+                    height: 300,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: imageProvider,
@@ -69,33 +51,33 @@ class CardCoffe extends StatelessWidget {
                       color: primary,
                     ),
                   ),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
-            ),
-            // Name text at the bottom
-            Positioned(
-              bottom: 45,
-              left: 10,
-              right: 10,
-              child: AppGlobalText(
-                text: coffe.name!,
-                style: TextStyleEnum.p_bold,
-                color: primary,
+              const AppGlobalVericalSpacing(
+                value: 4,
               ),
-            ),
-            Positioned(
-              bottom: 20,
-              left: 10,
-              right: 10,
-              child: AppGlobalText(
-                text: coffe.price.toString(),
-                style: TextStyleEnum.p_medium,
-                color: dark,
-              ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      child: AppGlobalText(
+                        text: coffe.name!,
+                        style: TextStyleEnum.p_medium,
+                      ),
+                    ),
+                    AppGlobalText(
+                      text: "\$ ${coffe.price.toString()}",
+                      style: TextStyleEnum.p_bold,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

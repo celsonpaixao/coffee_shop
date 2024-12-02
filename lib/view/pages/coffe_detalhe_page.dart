@@ -32,7 +32,10 @@ class _CoffeDetalhePageState extends State<CoffeDetalhePage> {
       child: Consumer<CoffeDetalheViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isLoading) {
-            return const Center(child: CircularProgressIndicator(color: primary,));
+            return const Center(
+                child: CircularProgressIndicator(
+              color: primary,
+            ));
           }
 
           if (viewModel.errorMessage != null) {
@@ -72,7 +75,6 @@ class _CoffeDetalhePageState extends State<CoffeDetalhePage> {
         height: MediaQuery.of(context).size.height * .6,
         decoration: const BoxDecoration(
           color: secundary,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
         ),
         child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -98,21 +100,17 @@ class _CoffeDetalhePageState extends State<CoffeDetalhePage> {
                   text: viewModel.coffe!.region!,
                   style: TextStyleEnum.p_bold,
                 ),
-
-                // Gerando os perfis de sabor
                 ...List.generate(
                   viewModel.coffe!.flavorProfile!.length,
                   (index) => AppGlobalText(
-                    text: viewModel.coffe!.flavorProfile![
-                        index], // Usando o valor de flavorProfile
+                    text: viewModel.coffe!.flavorProfile![index],
                     style: TextStyleEnum.caption,
                   ),
                 ),
-                 ...List.generate(
+                ...List.generate(
                   viewModel.coffe!.grindOption!.length,
                   (index) => AppGlobalText(
-                    text: viewModel.coffe!.grindOption![
-                        index], // Usando o valor de flavorProfile
+                    text: viewModel.coffe!.grindOption![index],
                     style: TextStyleEnum.caption,
                   ),
                 ),

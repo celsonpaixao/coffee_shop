@@ -1,4 +1,5 @@
 import 'package:coffee_shop/app_module.dart';
+import 'package:coffee_shop/style/app_colors.dart';
 import 'package:coffee_shop/viewmodel/coffe_detalhe_view_model.dart';
 import 'package:coffee_shop/viewmodel/home_view_model.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: primary),
         useMaterial3: true,
       ),
       routeInformationParser: Modular.routeInformationParser,
