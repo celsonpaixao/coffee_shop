@@ -10,11 +10,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
-  final dio = Dio(BaseOptions(
-    baseUrl: baseUrl,
-    connectTimeout: const Duration(seconds: 5),
-    receiveTimeout: const Duration(seconds: 10),
-  ));
+  final dio = Dio(BaseOptions(baseUrl: baseUrl));
   @override
   void binds(Injector i) {
     i.addLazySingleton<ENavigation>(ENavigation.new);
@@ -26,11 +22,12 @@ class AppModule extends Module {
   void routes(RouteManager r) {
     r.child(
       Router.initialRoute,
-      transition: TransitionType.rightToLeftWithFade,
+      transition: TransitionType.rightToLeft,
       child: (context) => const SplashPage(),
     );
     r.child(
       Router.homePage,
+      transition: TransitionType.rightToLeft,
       child: (context) => const HomePage(),
     );
     r.child(

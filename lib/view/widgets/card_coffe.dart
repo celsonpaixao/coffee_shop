@@ -5,6 +5,7 @@ import 'package:coffee_shop/style/app_text_style.dart';
 import 'package:coffee_shop/view/widgets/app_global_spacing.dart';
 import 'package:coffee_shop/view/widgets/app_global_text.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CardCoffe extends StatelessWidget {
   final CoffeModel coffe;
@@ -30,7 +31,7 @@ class CardCoffe extends StatelessWidget {
             children: [
               Container(
                 width: 200,
-                height: 200,
+                height: 22.h,
                 decoration: BoxDecoration(
                   color: secundary.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(10),
@@ -38,7 +39,7 @@ class CardCoffe extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: coffe.imageUrl!,
                   imageBuilder: (context, imageProvider) => Container(
-                    height: 300,
+                    height: 22.h,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: imageProvider,

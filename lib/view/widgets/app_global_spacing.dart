@@ -8,7 +8,7 @@ class AppGlobalVericalSpacing extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: value ?? 8,
-      width: double.maxFinite,
+      width: 0,
     );
   }
 }
@@ -21,7 +21,7 @@ class AppGlobalHorizontalSpacing extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: value ?? 8,
-      height: double.maxFinite,
+      height: 0,
     );
   }
 }

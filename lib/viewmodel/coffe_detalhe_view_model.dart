@@ -18,7 +18,7 @@ class CoffeDetalheViewModel extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-Future<void> findCoffe(int id) async {
+  Future<void> findCoffe(int id) async {
     _setLoading(true);
     _errorMessage = null;
     try {
@@ -38,6 +38,9 @@ Future<void> findCoffe(int id) async {
     }
   }
 
+  backToHome() {
+    navigation.goToBack();
+  }
 
   void _setLoading(bool value) {
     _isLoading = value;

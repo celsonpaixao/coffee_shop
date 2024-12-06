@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
 
   Container _buildBody(HomeViewModel viewModel) {
     return Container(
+      color: Colors.white,
       child: viewModel.isLoading
           ? const Center(
               child: CircularProgressIndicator(

@@ -5,6 +5,7 @@ import 'package:coffee_shop/viewmodel/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
   runApp(
@@ -17,9 +18,13 @@ void main() {
           create: (context) => CoffeDetalheViewModel(),
         )
       ],
-      child: ModularApp(
-        module: AppModule(),
-        child: const MyApp(),
+      child: ResponsiveSizer(
+        builder: (context, orientation, screenType) {
+          return ModularApp(
+            module: AppModule(),
+            child: const MyApp(),
+          );
+        },
       ),
     ),
   );
